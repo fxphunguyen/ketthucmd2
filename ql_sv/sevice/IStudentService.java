@@ -22,6 +22,7 @@ public interface IStudentService {
 
     public boolean checkDuplicateId(long id);
 
+
     List <Student> sortByScoreASC();
 
     List <Student> sortByScoreDES();

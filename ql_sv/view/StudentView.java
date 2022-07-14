@@ -49,37 +49,37 @@ public class StudentView {
         studentService.findAll();
         try {
 
-            System.out.println("Input name student: ");
+            System.out.println("Nhập tên sinh viên: ");
             String fullName = input.nextLine();
             while (fullName.trim().equals("")) {
                 fullName = input.nextLine();
             }
 
-            System.out.println("Input age student ");
+            System.out.println("Nhập tuổi sinh viên ");
             int age = Integer.parseInt(input.nextLine());
             while (age <= 0) {
-                System.out.println("Wrong Input. Age > 0. Try again. ");
+                System.out.println("Tuổi phải lớn hơn 0!. ");
                 age = input.nextInt();
             }
 
-            System.out.println("Input gender student");
+            System.out.println("Giới tính");
             String gender = input.nextLine();
 
-            System.out.println("Input address: ");
+            System.out.println("Địa chỉ: ");
             String address = input.nextLine();
 
-            System.out.println("Input Average Score");
+            System.out.println("Nhập điểm trung bình: ");
             double averageScore = Double.parseDouble(input.nextLine());
             while (averageScore <= 0.0) {
-                System.out.println("AVR Score > 0. Input again. ");
+                System.out.println("Điểm trung bình phải lớn hơn 0. ");
                 averageScore = input.nextDouble();
             }
 
             studentService.add(new Student(fullName, age, gender, address, averageScore));
-            System.out.println("ADD STUDENT SUCCESSFULLY.");
+            System.out.println("Thêm sinh viên thành công.");
 
         } catch (Exception e) {
-            System.out.println("Wrong Input! Try again.");
+            System.out.println("Nhập sai! Nhập lại.");
             e.printStackTrace();
         }
     }
@@ -93,62 +93,62 @@ public class StudentView {
         if (studentService.checkDuplicateId(id)) {
 
             System.out.println("------  EDIT INFO  ------");
-            System.out.println("|   1. Edit name        |");
-            System.out.println("|   2. Edit age         |");
-            System.out.println("|   3. Edit gender      |");
-            System.out.println("|   4. Edit address     |");
-            System.out.println("|   5. Edit AVR Score   |");
-            System.out.println("------------------------");
-            System.out.println("Input number to edit product");
+            System.out.println("|   1. Sửa tên            |");
+            System.out.println("|   2. Sửa tuổi           |");
+            System.out.println("|   3. Sửa giới tính      |");
+            System.out.println("|   4. Sửa địa chỉ        |");
+            System.out.println("|   5. Sửa điểm TB        |");
+            System.out.println("---------------------------");
+            System.out.println("Nhập chức năng cần sửa: ");
             int choice = input.nextInt();
             input.nextLine();
             try {
                 switch (choice) {
                     case 1:
-                        System.out.println("Edit name student: ");
+                        System.out.println("Cập nhật tên sinh viên: ");
                         String fullName = input.nextLine();
                         student.setFullName(fullName);
                         studentService.update(student);
-                        System.out.println("Successfully updated name");
+                        System.out.println("Cập nhật tên thành công");
                         break;
 
                     case 2:
-                        System.out.println("Edit age student: ");
+                        System.out.println("Cập nhật tuổi sinh viên: ");
                         int age = input.nextInt();
                         student.setAge(age);
                         studentService.update(student);
-                        System.out.println("Successfully updated age");
+                        System.out.println("Cập nhật tuổi thành công");
                         break;
 
                     case 3:
-                        System.out.println("Edit Gender student");
+                        System.out.println("Cập nhật giới tính: ");
                         String gender = input.nextLine();
                         student.setGender(gender);
                         studentService.update(student);
-                        System.out.println("Successfully updated Gender");
+                        System.out.println("Cập nhật thành công");
                         break;
 
                     case 4:
-                        System.out.println("Edit Address student");
+                        System.out.println("Cập nhật địa chi");
                         String address = input.nextLine();
                         student.setAddress(address);
                         studentService.update(student);
-                        System.out.println("Successfully updated Address");
+                        System.out.println("Cập nhật thành công");
                         break;
 
                     case 5:
-                        System.out.println("Edit AVR Score student");
+                        System.out.println("Cập nhật điểm trung bình");
                         double avrscore = input.nextDouble();
                         student.setAverageScore(avrscore);
                         studentService.update(student);
-                        System.out.println("Successfully updated AVRScore");
+                        System.out.println("Cập nhật thành công");
                         break;
                     default:
-                        System.out.println("Wrong choice ! Try again .");
+                        System.out.println("Sai chức năng! Nhập lại .");
                         update();
                 }
             } catch (Exception e) {
-                System.out.println("Wrong input! Try again.");
+                System.out.println("Sai chức năng! Nhập lại.");
                 e.printStackTrace();
             }
         }
@@ -157,16 +157,16 @@ public class StudentView {
 
     public void remove() {
         studentService.findAll();
-        System.out.println("Input Id Product that you want to remove.");
+        System.out.println("Nhập id sinh viên cần xóa.");
         int id = input.nextInt();
         Student student = studentService.findById(id);
         if (student == null) {
-            System.out.println("This ID not exist");
+            System.out.println("Id không tồn tại!");
         } else {
             boolean check = true;
             System.out.println("------------REMOVE CONFIRM-----------");
-            System.out.println("        1. Input 1 to remove ");
-            System.out.println("        2. Back to Menu");
+            System.out.println("        1. Chọn 1 để xóa ");
+            System.out.println("        2. Quay lại menu");
             System.out.println("--------------------------------------");
             int choice1 = input.nextInt();
             input.nextLine();
@@ -174,7 +174,7 @@ public class StudentView {
                 switch (choice1) {
                     case 1:
                         studentService.removeById(id);
-                        System.out.println("Item removed successfully");
+                        System.out.println("Xóa thành công");
                         do {
                             System.out.println("Input 'y' to comeback menu Product | 'n' to exit ");
                             String choice2 = input.nextLine();
@@ -186,7 +186,7 @@ public class StudentView {
                                     System.exit(0);
                                     break;
                                 default:
-                                    System.out.println("Wrong input. Try again.");
+                                    System.out.println("Nhập sai! Nhập lại.");
                                     check = false;
                             }
                         } while (!check);
@@ -195,7 +195,7 @@ public class StudentView {
                         StudentMenuView.run();
                         break;
                     default:
-                        System.out.println("Wrong input. Try again.");
+                        System.out.println("Nhập sai! Nhập lại.");
 
                 }
             } catch (Exception e) {

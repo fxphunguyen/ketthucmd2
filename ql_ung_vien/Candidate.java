@@ -1,41 +1,45 @@
 package ql_ung_vien;
 
-public class Candidate {
-    private Long candidateId;
+public abstract class Candidate {
+    private int candidateId;
     private String fullName;
-    private int birthDay;
-    private int phone;
+    private String birthDate;
+    private int phoneNumber;
     private String email;
-    private Candidate_Type candidate_type;
+    private String candidateType;
+    private int certificatedId;
+    private String certificatedName;
+    private int certificatedRank;
+    private String certificatedDate;
 
     public Candidate() {
     }
 
-    public Candidate(Long candidateId, String fullName, int birthDay, int phone, String email, Candidate_Type candidate_type) {
+    public Candidate(int candidateId, String fullName, String birthDate, int phoneNumber, String email, String candidateType, int certificatedId, String certificatedName, int certificatedRank, String certificatedDate) {
         this.candidateId = candidateId;
         this.fullName = fullName;
-        this.birthDay = birthDay;
-        this.phone = phone;
+        this.birthDate = birthDate;
+        this.phoneNumber = phoneNumber;
         this.email = email;
-        this.candidate_type = candidate_type;
+        this.candidateType = candidateType;
+        this.certificatedId = certificatedId;
+        this.certificatedName = certificatedName;
+        this.certificatedRank = certificatedRank;
+        this.certificatedDate = certificatedDate;
     }
 
-    public static Candidate parse(String record) {
-        String[] fields = record.split(",");
-        Long id = Long.parseLong(fields[0]);
-        String fullName = fields[1];
-        int birthDay = Integer.parseInt(fields[2]);
-        int phone = Integer.parseInt(fields[3]);
-        String email = fields[4];
-        Candidate_Type candidate_type = Candidate_Type.valueOf(fields[5]);
-        return new Candidate(id, fullName, birthDay, phone, email, candidate_type);
+    public Candidate(int certificatedId, String certificatedName, int certificatedRank, String certificatedDate) {
+        this.certificatedId = certificatedId;
+        this.certificatedName = certificatedName;
+        this.certificatedRank = certificatedRank;
+        this.certificatedDate = certificatedDate;
     }
 
-    public Long getCandidateId() {
+    public int getCandidateId() {
         return candidateId;
     }
 
-    public void setCandidateId(Long candidateId) {
+    public void setCandidateId(int candidateId) {
         this.candidateId = candidateId;
     }
 
@@ -47,20 +51,20 @@ public class Candidate {
         this.fullName = fullName;
     }
 
-    public int getBirthDay() {
-        return birthDay;
+    public String getBirthDate() {
+        return birthDate;
     }
 
-    public void setBirthDay(int birthDay) {
-        this.birthDay = birthDay;
+    public void setBirthDate(String birthDate) {
+        this.birthDate = birthDate;
     }
 
-    public int getPhone() {
-        return phone;
+    public int getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setPhone(int phone) {
-        this.phone = phone;
+    public void setPhoneNumber(int phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public String getEmail() {
@@ -71,22 +75,64 @@ public class Candidate {
         this.email = email;
     }
 
-    public Candidate_Type getCandidate_type() {
-        return candidate_type;
+    public String getCandidateType() {
+        return candidateType.equals ( "0" )?"EXPERIENCE": candidateType.equals ( "1" )?"FRESHER":candidateType.equals ( "2" )?"INTERN":"INVALID!";
     }
 
-    public void setCandidate_type(Candidate_Type candidate_type) {
-        this.candidate_type = candidate_type;
+    public void setCandidateType(String candidateType) {
+        this.candidateType = candidateType;
+    }
+
+    public int getCertificatedId() {
+        return certificatedId;
+    }
+
+    public void setCertificatedId(int certificatedId) {
+        this.certificatedId = certificatedId;
+    }
+
+    public String getCertificatedName() {
+        return certificatedName;
+    }
+
+    public void setCertificatedName(String certificatedName) {
+        this.certificatedName = certificatedName;
+    }
+
+    public int getCertificatedRank() {
+        return certificatedRank;
+    }
+
+    public void setCertificatedRank(int certificatedRank) {
+        this.certificatedRank = certificatedRank;
+    }
+
+    public String getCertificatedDate() {
+        return certificatedDate;
+    }
+
+    public void setCertificatedDate(String certificatedDate) {
+        this.certificatedDate = certificatedDate;
     }
 
     @Override
     public String toString() {
-        return String.format("%s,%s,%s,%s,%s,%s",
-                candidateId,
-                fullName,
-                birthDay,
-                phone,
-                email,
-                candidate_type);
+        return "Candidate{" +
+                "candidateId=" + candidateId +
+                ", fullName='" + fullName + '\'' +
+                ", birthDate='" + birthDate + '\'' +
+                ", phoneNumber=" + phoneNumber +
+                ", email='" + email + '\'' +
+                ", candidateType='" + candidateType + '\'' +
+                ", certificatedId=" + certificatedId +
+                ", certificatedName='" + certificatedName + '\'' +
+                ", certificatedRank=" + certificatedRank +
+                ", certificatedDate='" + certificatedDate + '\'' +
+                '}';
+    }
+
+    public abstract void showMe();
+    public void showInfo(){
+        toString ();
     }
 }
